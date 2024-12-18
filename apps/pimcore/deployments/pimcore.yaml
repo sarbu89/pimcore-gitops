@@ -14,7 +14,7 @@ spec:
     spec:
       initContainers:
         - name: pimcore-migration
-          image: pimcore/pimcore:2024.x
+          image: pimcore/pimcore:php8.2-v3
           command: ["/var/www/html/bin/console", "pimcore:migrations:migrate", "--no-interaction"]
           envFrom:
             - configMapRef:
@@ -24,7 +24,7 @@ spec:
               mountPath: /var/www/html/var
       containers:
         - name: pimcore
-          image: pimcore/pimcore:2024.x
+          image: pimcore/pimcore:php8.2-v3
           ports:
             - containerPort: 9000
           envFrom:
@@ -36,7 +36,7 @@ spec:
             - name: pimcore-var-volume
               mountPath: /var/www/html/var
         - name: pimcore-messenger # Sidecar container
-          image: pimcore/pimcore:2024.x # Use the same image
+          image: pimcore/pimcore:php8.2-supervisord-v3 # Use the same image
           command: ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
           envFrom:
             - configMapRef:
