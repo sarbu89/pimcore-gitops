@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pimcore-config
+data:
+  PIMCORE_DATABASE_HOST: "mysql" # will be resolved via k8s dns
+  PIMCORE_DATABASE_PORT: "3306"
+  PIMCORE_DATABASE_NAME: "pimcore"
+  PIMCORE_DATABASE_USER: "pimcore"
+  PIMCORE_DATABASE_PASSWORD: "password"  # Change this!!!
+  PIMCORE_REDIS_HOST: "redis" # will be resolved via k8s dns
+  PIMCORE_REDIS_PORT: "6379"
+  PIMCORE_ADMIN_USERNAME: "admin"
+  PIMCORE_ADMIN_PASSWORD: "admin"   # Change this!!!
+  PIMCORE_MAIL_TRANSPORT: "smtp"
+  PIMCORE_MAIL_HOST: "mailhog"
+  PIMCORE_MAIL_PORT: "1025"
+  PIMCORE_MAIL_USER: ""
+  PIMCORE_MAIL_PASSWORD: ""
+  PIMCORE_MAIL_ENCRYPTION: ""
+  PIMCORE_ELASTICSEARCH_HOST: "elasticsearch" # will be resolved via k8s dns
+  PIMCORE_ELASTICSEARCH_PORT: "9200"

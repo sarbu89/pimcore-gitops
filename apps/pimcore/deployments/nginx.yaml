@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+          volumeMounts:
+          - name: pimcore-assets-volume
+            mountPath: /var/www/html/public/var/assets
+          - name: pimcore-var-volume
+            mountPath: /var/www/html/var
+          - name: nginx-conf
+            mountPath: /etc/nginx/conf.d
+      volumes:
+        - name: pimcore-assets-volume
+          persistentVolumeClaim:
+            claimName: pimcore-assets-pvc
+        - name: pimcore-var-volume
+          persistentVolumeClaim:
+            claimName: pimcore-var-pvc
+        - name: nginx-conf
+          configMap:
+            name: nginx-config
